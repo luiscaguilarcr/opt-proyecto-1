@@ -21,15 +21,3 @@ form {
 button {
   align-self: center;
 }
-
-.clickeable-text {
-  color: blue; 
-}
-
-.clickeable-text:hover {
-  transform: scaleX(1);
-  text-decoration: underline;
-  cursor: pointer;
-  font-weight: 500;
-}
-  
