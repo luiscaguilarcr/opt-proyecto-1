@@ -5,7 +5,6 @@
         <mat-form-field appearance="outline">
           <mat-label>Preguntas</mat-label>
           <mat-select formControlName="selectedQuestion" required>
-            <mat-option *ngFor="let question of questions" [value]="question._id">{{ question._id }}</mat-option>
             <mat-option *ngFor="let question of questions" [value]="question.question">{{ question.question }}</mat-option>
           </mat-select>
         </mat-form-field>

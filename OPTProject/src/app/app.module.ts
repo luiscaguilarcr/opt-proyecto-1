@@ -14,6 +14,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { FormComponent } from './form/form.component';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,11 @@ import { FormComponent } from './form/form.component';
     MatButtonModule,
     MatCardModule,
     AppRoutingModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
