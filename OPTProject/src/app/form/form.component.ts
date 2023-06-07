@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionsService } from '../services/questions/questions.service';
 import { question } from '../models/question';
 
@@ -9,17 +8,13 @@ import { question } from '../models/question';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  form!: FormGroup;
   questions: question[] = [];
+  currentQuestionIndex: number = 0;
 
-  constructor(private questionsService: QuestionsService, private formBuilder: FormBuilder) { }
+  constructor(private questionsService: QuestionsService) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      selectedQuestion: ['', Validators.required]
-    });
-
-    this.questionsService.getQuestions().subscribe( 
+    this.questionsService.getQuestions().subscribe(
       response => {
         this.questions = response;
         console.log(response);
@@ -30,14 +25,16 @@ export class FormComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    if (this.form.valid) {
-      const selectedQuestionId = this.form.get('selectedQuestion')?.value;
-      const selectedQuestion = this.questions.find(question => question._id === selectedQuestionId);
-      if (selectedQuestion) {
-        console.log('Pregunta seleccionada:', selectedQuestion.question);
-      }
-    }
+  previousQuestion() {
+    this.currentQuestionIndex--;
+  }
+
+  nextQuestion() {
+    this.currentQuestionIndex++;
+  }
+
+  finish() {
+    console.log('¡Test terminado!');
+    // Realizar acciones finales o redireccionar a otra página
   }
 }
-
