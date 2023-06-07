@@ -1,10 +1,12 @@
 .toolbar {
-  display: flex;
   justify-content: center;
   align-items: center;
   background-color: primary;
   color: #ffffff;
   padding: 16px;
+  top: auto;
+  position: fixed;
+  z-index: 9999;
 }
 
 .welcome-title {
@@ -64,4 +66,15 @@
   display: flex;
   justify-content: center;
   margin-top: 16px;
+}
+
+.small-image {
+  max-width: 350px; /* Ajusta el tamaño máximo deseado */
+  max-height: 350px; /* Ajusta el tamaño máximo deseado */
+  align-content: center;
+}
+.image-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
