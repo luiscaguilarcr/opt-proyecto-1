@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
     <div *ngIf="questions.length > 0">
-      <h2>{{ questions[currentQuestionIndex]?.question }}</h2>
+      <h2>{{ questions[currentQuestionIndex].question }}</h2>
       <mat-radio-group [(ngModel)]="selectedAnswer">
         <mat-radio-button *ngFor="let option of getOptions()" [value]="option">{{ option }}</mat-radio-button>
       </mat-radio-group>
