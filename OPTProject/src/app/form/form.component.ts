@@ -4,7 +4,7 @@ import { question } from '../models/question';
 import { Answer } from '../models/answer';
 import { UserAnswer } from '../models/useranswer';
 import { AnswersService } from '../services/answers/answers.service';
-import { user } from '../models/user'; // Importa el modelo 'user'
+import { user } from '../models/user';
 
 @Component({
   selector: 'app-formulario',
@@ -16,12 +16,14 @@ export class FormComponent implements OnInit {
   currentQuestionIndex: number = 0;
   selectedAnswer: number = 1; // Valor predeterminado para el primer radio button
   answers: Answer[] = [];
-  user: user = new user(); // Declara e inicializa la propiedad 'user' con un nuevo objeto 'user'
+  user: user = new user(); // Objeto User para almacenar el email del usuario
 
   constructor(
     private questionsService: QuestionsService,
-    private answersService: AnswersService
-  ) {}
+    private answersService: AnswersService,
+  ) {
+    this.user = this.user;
+  }
 
   ngOnInit(): void {
     this.questionsService.getQuestions().subscribe(
@@ -42,29 +44,25 @@ export class FormComponent implements OnInit {
 
   finish() {
     console.log('¡Test terminado!');
-    let userAnswers: UserAnswer[];
-
-    // Obtener el ID del usuario desde la propiedad 'user' en tu componente
-    const userId = this.user.email; // Suponiendo que el email del usuario sea el ID
-
-    userAnswers = this.questions.map((question) => {
+  
+    const userAnswers: UserAnswer[] = this.questions.map((question) => {
       const selectedOption = this.selectedAnswer !== undefined ? this.selectedAnswer : null;
       const weight: number = selectedOption || 0;
-
+  
       const answer: Answer = {
         question_id: question._id,
         answer: selectedOption,
         weight: weight
       };
-
+  
       return {
-        user_id: userId,
+        user_id: this.user.email, // Utiliza el email del usuario como user_id
         ...answer
       };
     });
-
+  
     console.log('Respuestas seleccionadas:', userAnswers);
-
+  
     this.answersService.putAnswers(userAnswers).subscribe(
       (response) => {
         console.log('Respuestas de usuario guardadas:', response);
@@ -74,8 +72,8 @@ export class FormComponent implements OnInit {
         console.log('Error al guardar respuestas de usuario:', error);
       }
     );
-  }
-
+  }  
+  
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }
