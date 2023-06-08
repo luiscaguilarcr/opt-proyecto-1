@@ -41,19 +41,23 @@ export class FormComponent implements OnInit {
   finish() {
     console.log('¡Test terminado!');
     const selectedQuestion = this.questions[this.currentQuestionIndex];
+    const selectedOption = this.selectedAnswer !== undefined ? this.selectedAnswer : null;
+  
+    let weight: number = selectedOption || 0; // Asignar el valor de selectedOption a weight, o 0 si es null o undefined
+  
     const answer: Answer = {
       question_id: selectedQuestion._id,
-      answer: this.selectedAnswer !== undefined ? this.selectedAnswer : null,
-      weight: selectedQuestion.weight
+      answer: selectedOption,
+      weight: weight
     };
-    this.answers.push({...answer});
-
+    this.answers.push({ ...answer });
+  
     // Guardar la respuesta de usuario en la API
     const userAnswer: UserAnswer = {
       user_id: 'string', // Reemplazar con el ID del usuario
       ...answer
     };
-
+  
     this.answersService.putAnswers([userAnswer]).subscribe(
       (response) => {
         console.log('Respuesta de usuario guardada:', response);
@@ -64,7 +68,7 @@ export class FormComponent implements OnInit {
       }
     );
   }
-
+  
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }
