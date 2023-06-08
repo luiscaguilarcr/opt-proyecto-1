@@ -1,4 +1,4 @@
-export class Answer {
-    user_id: string = '';
-    items: { question_id: string, answer: number }[] = [];
-  }  
+export interface Answer {
+  question_id: string;
+  answer: number;
+}

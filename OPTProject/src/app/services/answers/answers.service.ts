@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Answer } from 'src/app/models/answer';
 import { environment } from 'src/environments/environments';
 import { httpOptions } from '../utils';
@@ -11,7 +12,7 @@ export class AnswersService {
   URL = `${environment.apiUrl}actions/submit/`;
   constructor(private http: HttpClient) {}
 
-  putAnswers(answer: Answer) {
-    return this.http.put<Answer[]>(this.URL, answer, httpOptions);
+  putAnswers(answers: Answer[]): Observable<any> {
+    return this.http.put<any>(this.URL, answers);
   }
 }
