@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../services/questions/questions.service';
 import { question } from '../models/question';
 import { Answer } from '../models/answer';
+import { UserAnswer } from '../models/useranswer';
 import { AnswersService } from '../services/answers/answers.service';
 
 @Component({
@@ -18,16 +19,16 @@ export class FormComponent implements OnInit {
   constructor(
     private questionsService: QuestionsService,
     private answersService: AnswersService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.questionsService.getQuestions().subscribe(
-      response => {
+      (response) => {
         this.questions = response;
         console.log(response);
       },
-      error => {
-        console.log("Error", error)
+      (error) => {
+        console.log('Error', error);
       }
     );
   }
@@ -42,23 +43,28 @@ export class FormComponent implements OnInit {
     const selectedQuestion = this.questions[this.currentQuestionIndex];
     const answer: Answer = {
       question_id: selectedQuestion._id,
-      answer: this.selectedAnswer
+      answer: this.selectedAnswer !== undefined ? this.selectedAnswer : null,
+      weight: selectedQuestion.weight
     };
-    this.answers.push(answer);
+    this.answers.push({...answer});
 
-    // Guardar las respuestas en la API
-    this.answersService.putAnswers(this.answers).subscribe(
-      response => {
-        console.log('Respuestas guardadas:', response);
+    // Guardar la respuesta de usuario en la API
+    const userAnswer: UserAnswer = {
+      user_id: 'string', // Reemplazar con el ID del usuario
+      ...answer
+    };
+
+    this.answersService.putAnswers([userAnswer]).subscribe(
+      (response) => {
+        console.log('Respuesta de usuario guardada:', response);
         // Realizar acciones finales o redireccionar a otra página
       },
-      error => {
-        console.log('Error al guardar respuestas:', error);
+      (error) => {
+        console.log('Error al guardar respuesta de usuario:', error);
       }
     );
   }
 
-  // Obtener las opciones de respuesta del 1 al 10
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }

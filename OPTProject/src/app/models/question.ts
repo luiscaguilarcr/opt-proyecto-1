@@ -1,5 +1,5 @@
-export class question {
-    _id: string = '';
-    question: string = '';
-    options: number[] = [];
-}
+export interface question {
+    _id: string;
+    question: string;
+    weight: number;
+  }  

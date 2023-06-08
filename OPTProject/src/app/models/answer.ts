@@ -1,4 +1,5 @@
 export interface Answer {
   question_id: string;
-  answer: number;
+  answer: number | null;
+  weight: number;
 }
