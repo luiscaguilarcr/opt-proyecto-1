@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
     console.log('¡Test terminado!');
   
     const userAnswers: UserAnswer[] = this.questions.map((question) => {
-      const selectedOption = this.selectedAnswer !== undefined ? this.selectedAnswer : null;
+      const selectedOption = question.answer || null; // Utiliza la propiedad "answer" de la pregunta en lugar de "selectedAnswer"
       const weight: number = selectedOption || 0;
   
       const answer: Answer = {
@@ -56,7 +56,7 @@ export class FormComponent implements OnInit {
       };
   
       return {
-        user_id: this.user.email, // Utiliza el email del usuario como user_id
+        user_id: this.user.email,
         ...answer
       };
     });
@@ -72,7 +72,8 @@ export class FormComponent implements OnInit {
         console.log('Error al guardar respuestas de usuario:', error);
       }
     );
-  }  
+  }
+  
   
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);

@@ -2,7 +2,7 @@
   <mat-card-content>
     <div *ngIf="questions.length > 0">
       <h2>{{ questions[currentQuestionIndex].question }}</h2>
-      <mat-radio-group [(ngModel)]="selectedAnswer">
+      <mat-radio-group [(ngModel)]="questions[currentQuestionIndex].answer">
         <mat-radio-button *ngFor="let option of getOptions()" [value]="option">{{ option }}</mat-radio-button>
       </mat-radio-group>
       <button mat-button (click)="nextQuestion()" *ngIf="currentQuestionIndex < questions.length - 1">Siguiente</button>
@@ -10,3 +10,5 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+
