@@ -32,11 +32,6 @@ export class FormComponent implements OnInit {
     );
   }
 
-  previousQuestion() {
-    this.currentQuestionIndex--;
-    this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
-  }
-
   nextQuestion() {
     this.currentQuestionIndex++;
     this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
