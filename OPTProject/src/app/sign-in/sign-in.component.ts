@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users/users.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import { TokenService } from '../services/tokens/tokens.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -34,7 +36,11 @@ export class SignInComponent implements OnInit {
         this.authService.setToken(data);
       },
       error => {
-        console.log("Error", error)
+        Swal.fire('Error de inicio de sesión')
+        this.signInForm = this.formBuilder.group({
+          email: [''],
+          password: ['']
+        });
       }
     );
   }

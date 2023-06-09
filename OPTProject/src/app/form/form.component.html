@@ -1,14 +1,16 @@
+
 <mat-card>
-    <mat-card-title>Formulario</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-          <mat-label>Preguntas</mat-label>
-          <mat-select formControlName="selectedQuestion" required>
-            <mat-option *ngFor="let question of questions" [value]="question._id">{{ question._id }}</mat-option>
-            <mat-option *ngFor="let question of questions" [value]="question.question">{{ question.question }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-  </mat-card>
+  <mat-card-content>
+    <div *ngIf="questions.length > 0">
+      <h2>{{ numeroActual }} {{ questions[currentQuestionIndex].question }}</h2>     
+      <mat-radio-group [(ngModel)]="questions[currentQuestionIndex].answer" name="answer" required>
+        <mat-radio-button *ngFor="let option of getOptions()" [value]="option">{{ option }}</mat-radio-button>
+      </mat-radio-group>
+      <mat-card-content class="button-card">
+        <button mat-raised-button color="primary" (click)="nextQuestion()" *ngIf="currentQuestionIndex < questions.length - 1">Siguiente</button>
+        <button mat-raised-button color="warn" (click)="finish()" *ngIf="currentQuestionIndex === questions.length - 1">Terminar</button>
+      </mat-card-content>  
+    </div>     
+  </mat-card-content>
+</mat-card>
+
