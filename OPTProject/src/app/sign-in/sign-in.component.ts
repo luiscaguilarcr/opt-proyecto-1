@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users/users.service';
-import { AuthService } from '../services/auth/auth.service';
 
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -36,7 +36,6 @@ export class SignInComponent implements OnInit {
         if (data) {
           this.authService.setToken(data);
         }
-        console.log(this.authService.getToken())
       },
       error => {
         Swal.fire('Error de inicio de sesión')

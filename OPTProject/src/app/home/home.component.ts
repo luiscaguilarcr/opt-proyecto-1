@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToForm() {
-    this.router.navigate(['/formulario']);
+    this.router.navigate(['/form']);
   }
 }
 

@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-formulario',
+  selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
@@ -20,14 +20,14 @@ export class FormComponent implements OnInit {
   answers: Answer[] = [];
   user: user = new user(); // Objeto User para almacenar el email del usuario
   numeroActual : number =  1;
-  
+
   constructor(
     private questionsService: QuestionsService,
     private answersService: AnswersService,
     private router: Router
   ) {
     this.user = this.user;
-   
+
   }
 
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class FormComponent implements OnInit {
       }
     this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
     }
-  
+
 
   finish() {
     const userAnswers: Answer[] = this.questions.map((question) => {
@@ -66,15 +66,15 @@ export class FormComponent implements OnInit {
     this.answersService.putAnswers(userAnswers).subscribe(
       (response) => {
         console.log('Respuestas de usuario guardadas:', response);
-        this.router.navigate(['/response']);
+        this.router.navigate(['/results']);
       },
       (error) => {
         console.log('Error al guardar respuestas de usuario:', error);
       }
     );
   }
-  
-  
+
+
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }
