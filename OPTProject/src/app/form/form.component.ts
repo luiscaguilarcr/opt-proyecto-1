@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../services/questions/questions.service';
 import { question } from '../models/question';
 import { Answer } from '../models/answer';
-import { UserAnswer } from '../models/useranswer';
 import { AnswersService } from '../services/answers/answers.service';
 import { user } from '../models/user';
 import Swal from 'sweetalert2';
@@ -34,6 +33,7 @@ export class FormComponent implements OnInit {
       (response) => {
         this.questions = response;
         console.log(response);
+        this.finish(); // Llamar al método finish() después de cargar las preguntas
       },
       (error) => {
         console.log('Error', error);
@@ -53,25 +53,19 @@ export class FormComponent implements OnInit {
 
   finish() {
     console.log('¡Test terminado!');
-  
-    const userAnswers: UserAnswer[] = this.questions.map((question) => {
+
+    const userAnswers: Answer[] = this.questions.map((question) => {
       const selectedOption = question.answer || null; // Utiliza la propiedad "answer" de la pregunta en lugar de "selectedAnswer"
       const weight: number = selectedOption || 0;
-  
-      const answer: Answer = {
+
+      return {
         question_id: question._id,
-        answer: selectedOption,
         weight: weight
       };
-  
-      return {
-        user_id: this.user.email,
-        ...answer
-      };
     });
-  
+
     console.log('Respuestas seleccionadas:', userAnswers);
-  
+
     this.answersService.putAnswers(userAnswers).subscribe(
       (response) => {
         console.log('Respuestas de usuario guardadas:', response);
@@ -82,8 +76,7 @@ export class FormComponent implements OnInit {
       }
     );
   }
-  
-  
+
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }
