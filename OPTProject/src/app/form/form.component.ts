@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-formulario',
+  selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
@@ -30,8 +30,13 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      selectedQuestion: ['', Validators.required]
+    });
+
     this.questionsService.getQuestions().subscribe(
-      (response) => {
+      response => {
+
         this.questions = response;
         console.log(response);
       },

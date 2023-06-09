@@ -5,21 +5,21 @@ import { token } from 'src/app/models/token';
     providedIn: 'root'
 })
 
-export class TokenService {
+export class AuthService {
 private accessToken = 'access_token';
 
 constructor() {}
 
-saveToken(token: token) {
+setToken(token: token) {
     localStorage.setItem(this.accessToken, `${token.token_type} ${token.access_token}`);
 }
 
-getToken(): string | null {
-    return localStorage.getItem(this.accessToken);
+removeToken() {
+  localStorage.removeItem(this.accessToken);
 }
 
-removeToken() {
-    localStorage.removeItem(this.accessToken);
+isLoggedIn(): boolean {
+  return !!localStorage.getItem(this.accessToken);
 }
 
 }
