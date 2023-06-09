@@ -31,10 +31,6 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      selectedQuestion: ['', Validators.required]
-    });
-
     this.questionsService.getQuestions().subscribe(
       response => {
 
@@ -56,7 +52,6 @@ export class FormComponent implements OnInit {
       }
     this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
     }
-
 
   finish() {
     const userAnswers: Answer[] = this.questions.map((question) => {
