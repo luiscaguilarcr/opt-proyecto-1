@@ -4,7 +4,7 @@ import { QuestionsService } from '../services/questions/questions.service';
 import { question } from '../models/question';
 
 @Component({
-  selector: 'app-formulario',
+  selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
@@ -19,7 +19,7 @@ export class FormComponent implements OnInit {
       selectedQuestion: ['', Validators.required]
     });
 
-    this.questionsService.getQuestions().subscribe( 
+    this.questionsService.getQuestions().subscribe(
       response => {
         this.questions = response;
         console.log(response);
