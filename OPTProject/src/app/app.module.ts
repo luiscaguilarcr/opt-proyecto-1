@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatRadioModule } from '@angular/material/radio';
     SignUpComponent,
     SignInComponent,
     HomeComponent,
-    FormComponent
+    FormComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

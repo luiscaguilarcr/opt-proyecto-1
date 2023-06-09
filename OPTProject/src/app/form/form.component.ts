@@ -3,6 +3,7 @@ import { QuestionsService } from '../services/questions/questions.service';
 import { question } from '../models/question';
 import { Answer } from '../models/answer';
 import { AnswersService } from '../services/answers/answers.service';
+import { Router } from '@angular/router';
 import { user } from '../models/user';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,13 +20,14 @@ export class FormComponent implements OnInit {
   answers: Answer[] = [];
   user: user = new user(); // Objeto User para almacenar el email del usuario
   numeroActual : number =  1;
-  
+
   constructor(
     private questionsService: QuestionsService,
     private answersService: AnswersService,
+    private router: Router
   ) {
     this.user = this.user;
-   
+
   }
 
   ngOnInit(): void {
@@ -54,27 +56,23 @@ export class FormComponent implements OnInit {
       }
     this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
     }
-  
+
 
   finish() {
-    console.log('¡Test terminado!');
-
     const userAnswers: Answer[] = this.questions.map((question) => {
       const selectedOption = question.answer || null; // Utiliza la propiedad "answer" de la pregunta en lugar de "selectedAnswer"
       const weight: number = selectedOption || 0;
 
       return {
-        question_id: question._id,
-        weight: weight
+        "question_id": question._id,
+        "weight": weight
       };
     });
-
-    console.log('Respuestas seleccionadas:', userAnswers);
 
     this.answersService.putAnswers(userAnswers).subscribe(
       (response) => {
         console.log('Respuestas de usuario guardadas:', response);
-        // Realizar acciones finales o redireccionar a otra página
+        this.router.navigate(['/results']);
       },
       (error) => {
         console.log('Error al guardar respuestas de usuario:', error);

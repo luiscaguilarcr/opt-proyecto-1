@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users/users.service';
+
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service';
-import { TokenService } from '../services/tokens/tokens.service';
 import Swal from 'sweetalert2';
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -32,8 +32,8 @@ export class SignInComponent implements OnInit {
 
     this.usersService.signIn(email, password).subscribe(
       (data) => {
-        this.router.navigate(['/home']);
         this.authService.setToken(data);
+        this.router.navigate(['/home']);
       },
       error => {
         Swal.fire('Error de inicio de sesión')
