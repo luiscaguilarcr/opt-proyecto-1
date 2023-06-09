@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users/users.service';
+import { AuthService } from '../services/auth/auth.service';
+
 import { Router } from '@angular/router';
-import { TokenService } from '../services/tokens/tokens.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 export class SignInComponent implements OnInit {
   signInForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private router: Router, private tokenService: TokenService) {}
+  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.signInForm = this.formBuilder.group({
@@ -33,9 +34,9 @@ export class SignInComponent implements OnInit {
       (data) => {
         this.router.navigate(['/home']);
         if (data) {
-          this.tokenService.saveToken(data);
+          this.authService.setToken(data);
         }
-        console.log(this.tokenService.getToken())
+        console.log(this.authService.getToken())
       },
       error => {
         Swal.fire('Error de inicio de sesión')

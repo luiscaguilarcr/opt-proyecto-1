@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../services/questions/questions.service';
 import { question } from '../models/question';
 import { Answer } from '../models/answer';
-import { UserAnswer } from '../models/useranswer';
 import { AnswersService } from '../services/answers/answers.service';
+import { Router } from '@angular/router';
 import { user } from '../models/user';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,6 +24,7 @@ export class FormComponent implements OnInit {
   constructor(
     private questionsService: QuestionsService,
     private answersService: AnswersService,
+    private router: Router
   ) {
     this.user = this.user;
    
@@ -52,30 +53,20 @@ export class FormComponent implements OnInit {
   
 
   finish() {
-    console.log('¡Test terminado!');
-  
-    const userAnswers: UserAnswer[] = this.questions.map((question) => {
+    const userAnswers: Answer[] = this.questions.map((question) => {
       const selectedOption = question.answer || null; // Utiliza la propiedad "answer" de la pregunta en lugar de "selectedAnswer"
       const weight: number = selectedOption || 0;
-  
-      const answer: Answer = {
-        question_id: question._id,
-        answer: selectedOption,
-        weight: weight
-      };
-  
+
       return {
-        user_id: this.user.email,
-        ...answer
+        "question_id": question._id,
+        "weight": weight
       };
     });
-  
-    console.log('Respuestas seleccionadas:', userAnswers);
-  
+
     this.answersService.putAnswers(userAnswers).subscribe(
       (response) => {
         console.log('Respuestas de usuario guardadas:', response);
-        // Realizar acciones finales o redireccionar a otra página
+        this.router.navigate(['/response']);
       },
       (error) => {
         console.log('Error al guardar respuestas de usuario:', error);
