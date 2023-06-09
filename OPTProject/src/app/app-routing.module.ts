@@ -14,8 +14,6 @@ const routes: Routes = [
   { path: 'form', component: FormComponent, canActivate: [AuthGuard]},
   { path: 'results', component: ResultsComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'sign-in' }
-
-
 ];
 
 @NgModule({

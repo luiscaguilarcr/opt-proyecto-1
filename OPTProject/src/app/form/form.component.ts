@@ -31,10 +31,16 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      selectedQuestion: ['', Validators.required]
+    });
+
     this.questionsService.getQuestions().subscribe(
-      (response) => {
+      response => {
+
         this.questions = response;
         console.log(response);
+        this.finish(); // Llamar al método finish() después de cargar las preguntas
       },
       (error) => {
         console.log('Error', error);
@@ -73,7 +79,6 @@ export class FormComponent implements OnInit {
       }
     );
   }
-
 
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);

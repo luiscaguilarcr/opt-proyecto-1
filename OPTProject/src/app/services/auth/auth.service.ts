@@ -21,5 +21,4 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem(this.accessToken);
   }
-
 }

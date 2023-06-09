@@ -32,10 +32,8 @@ export class SignInComponent implements OnInit {
 
     this.usersService.signIn(email, password).subscribe(
       (data) => {
+        this.authService.setToken(data);
         this.router.navigate(['/home']);
-        if (data) {
-          this.authService.setToken(data);
-        }
       },
       error => {
         Swal.fire('Error de inicio de sesión')
