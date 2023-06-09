@@ -11,7 +11,7 @@ export class ResultsComponent {
 
   ngOnInit(): void {
     if (true) {
-      this.router.navigate(["/home"]);
+      //this.router.navigate(["/home"]);
     }
   }
 }
