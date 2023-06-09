@@ -21,3 +21,8 @@ gap: 10px;
 button {
 align-self: center;
 }
+.button-card {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}

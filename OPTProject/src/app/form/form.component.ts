@@ -5,6 +5,8 @@ import { Answer } from '../models/answer';
 import { UserAnswer } from '../models/useranswer';
 import { AnswersService } from '../services/answers/answers.service';
 import { user } from '../models/user';
+import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
@@ -17,12 +19,14 @@ export class FormComponent implements OnInit {
   selectedAnswer: number = 1; // Valor predeterminado para el primer radio button
   answers: Answer[] = [];
   user: user = new user(); // Objeto User para almacenar el email del usuario
-
+  numeroActual : number =  1;
+  
   constructor(
     private questionsService: QuestionsService,
     private answersService: AnswersService,
   ) {
     this.user = this.user;
+   
   }
 
   ngOnInit(): void {
@@ -39,8 +43,13 @@ export class FormComponent implements OnInit {
 
   nextQuestion() {
     this.currentQuestionIndex++;
+    this.numeroActual++;
+      if (this.numeroActual === 37) {
+        this.numeroActual= 1;
+      }
     this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
-  }
+    }
+  
 
   finish() {
     console.log('¡Test terminado!');
@@ -78,4 +87,5 @@ export class FormComponent implements OnInit {
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }
+
 }
