@@ -5,6 +5,7 @@ import { Answer } from '../models/answer';
 import { AnswersService } from '../services/answers/answers.service';
 import { Router } from '@angular/router';
 import { user } from '../models/user';
+import {ResultsService} from "../services/results/results.service";
 
 @Component({
   selector: 'app-form',
@@ -23,6 +24,7 @@ export class FormComponent implements OnInit {
     private questionsService: QuestionsService,
     private answersService: AnswersService,
     private router: Router,
+    private resultsService: ResultsService
   ) {
     this.user = this.user;
   }
@@ -61,6 +63,7 @@ export class FormComponent implements OnInit {
     this.answersService.putAnswers(userAnswers).subscribe(
       (response) => {
         console.log('Respuestas de usuario guardadas:', response);
+        this.resultsService.results = response;
         this.router.navigate(['/results']);
       },
       (error) => {
@@ -72,5 +75,4 @@ export class FormComponent implements OnInit {
   getOptions(): number[] {
     return Array.from({ length: 10 }, (_, i) => i + 1);
   }
-
 }

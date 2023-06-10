@@ -1,8 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 mat-card {
-  max-width: 400px;
+  width: 22%;
   margin: 0 auto;
-  margin-top: 100px;
-  padding: 20px;
+  padding: 35px;
 }
 
 mat-card-title {
@@ -15,7 +21,7 @@ mat-card-title {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 button {
@@ -23,7 +29,7 @@ button {
 }
 
 .clickeable-text {
-  color: blue; 
+  color: blue;
 }
 
 .clickeable-text:hover {
@@ -32,4 +38,3 @@ button {
   cursor: pointer;
   font-weight: 500;
 }
-  
