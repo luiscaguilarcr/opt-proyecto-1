@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/c
 import {Router} from "@angular/router";
 import {ResultsService} from "../services/results/results.service";
 import * as Chart from 'chart.js';
+import {IntelligenceService} from "../services/intelligences/intelligence.service";
 
 @Component({
   selector: 'app-results',
@@ -9,20 +10,41 @@ import * as Chart from 'chart.js';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent {
-  constructor(private resultsService: ResultsService) {}
+  constructor(private resultsService: ResultsService, private router: Router, private intelligencesService: IntelligenceService) {}
 
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
 
-  private data: any;
+  data: any;
+  predominant: any = [];
   chart!: Chart;
 
   ngOnInit(): void {
     this.data = this.resultsService.results
     console.log(this.data)
+    if(this.data.length === 0) {
+      this.router.navigate(['/home']);
+    } else {
+      this.intelligencesService.getIntelligences().subscribe( {
+        next: (response) => {
+          this.data.items.forEach((item: any, index: number) => {
+            if(index <= 2) {
+              response.forEach((intelligence:any) => {
+                intelligence.name === item.intelligence_name ? this.predominant.push({"name": item.intelligence_name, "description": intelligence.description}) : null;
+              })
+            }
+          })
+        },
+        error: (error) => {
+          console.log("Error: ", error)
+        }
+      }
+      );
+    }
+
   }
 
   ngAfterViewInit() {
-    this.createChart();
+    //this.createChart();
   }
 
   createChart() {
@@ -33,9 +55,9 @@ export class ResultsComponent {
     }
 
     this.chart = new Chart(chartCanvas, {
-      type: 'pie',
+      type: 'bar',
       data: {
-        labels: this.data.items.map((item: { intelligence_code: { toString: () => any; }; }) => item.intelligence_code.toString()),
+        labels: this.data.items.map((item: { intelligence_name: { toString: () => any; }; }) => item.intelligence_name),
         datasets: [{
           label: 'Peso',
           data: this.data.items.map((item: { weight: any; }) => item.weight),

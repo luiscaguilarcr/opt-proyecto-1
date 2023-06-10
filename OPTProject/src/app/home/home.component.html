@@ -27,7 +27,7 @@
             <img mat-card-image class="small-image" src="https://www.juanbarrios.com/wp-content/uploads/2022/08/12_inteligencias.png_819477898.png" alt="Descripción de la imagen">
             <mat-card-content>
                 <div style="display:flex; justify-content:center; gap:10px">
-                    <button mat-raised-button color="warn" routerLink="/sign-in">Salir</button>
+                    <button mat-raised-button color="warn" (click)="logout()">Salir</button>
                     <button mat-raised-button color="primary" routerLink="/form">Realizar test</button>
                     <button *ngIf="hasResults" mat-raised-button color="primary" routerLink="/results">Ver resultados</button>
                 </div>
