@@ -41,6 +41,11 @@ export class FormComponent implements OnInit {
   }
 
   nextQuestion() {
+    if (this.questions[this.currentQuestionIndex].answer === undefined) {
+      // No se ha seleccionado una respuesta, muestra un mensaje de error o realiza alguna otra acción
+      console.log('Debes seleccionar una respuesta antes de continuar.')
+      return;
+    }
     this.currentQuestionIndex++;
     this.actualNumber++;
       if (this.actualNumber === 37) {
@@ -50,6 +55,11 @@ export class FormComponent implements OnInit {
     }
 
   onSubmit() {
+    if (this.questions[this.currentQuestionIndex].answer === undefined) {
+      // No se ha seleccionado una respuesta, muestra un mensaje de error o realiza alguna otra acción
+      console.log('Debes seleccionar una respuesta antes de continuar.')
+      return;
+    }
     const userAnswers: Answer[] = this.questions.map((question) => {
       const selectedOption = question.answer || null; // Utiliza la propiedad "answer" de la pregunta en lugar de "selectedAnswer"
       const weight: number = selectedOption || 0;
