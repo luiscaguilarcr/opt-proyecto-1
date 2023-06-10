@@ -56,7 +56,7 @@ export class FormComponent implements OnInit {
   onSubmit() {
     if (this.questions[this.currentQuestionIndex].answer === undefined) {
       // No se ha seleccionado una respuesta, muestra un mensaje de error o realiza alguna otra acción    
-      Swal.fire('Debes seleccionar una respuesta antes de continuar.')
+      console.log('Debes seleccionar una respuesta antes de continuar.')
       return;
     }
     const userAnswers: Answer[] = this.questions.map((question) => {
