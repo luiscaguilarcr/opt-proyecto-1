@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
   answers: Answer[] = [];
   user: user = new user(); // Objeto User para almacenar el email del usuario
   actualNumber : number =  1;
+ 
 
   constructor(
     private questionsService: QuestionsService,
@@ -41,24 +42,39 @@ export class FormComponent implements OnInit {
   }
 
   nextQuestion() {
+    const element = document.getElementById('elementId');
     if (this.questions[this.currentQuestionIndex].answer === undefined) {
       // No se ha seleccionado una respuesta, muestra un mensaje de error o realiza alguna otra acción
+      if (element) {
+        element.style.color = 'red';
+      }
       console.log('Debes seleccionar una respuesta antes de continuar.')
       return;
+    }
+    if (element) {
+      element.style.color = 'black';
     }
     this.currentQuestionIndex++;
     this.actualNumber++;
       if (this.actualNumber === 37) {
         this.actualNumber= 1;
       }
-    this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta
+    this.selectedAnswer = 1; // Reiniciar el valor seleccionado al cambiar de pregunta     
     }
 
   onSubmit() {
+    const element = document.getElementById('elementId');
     if (this.questions[this.currentQuestionIndex].answer === undefined) {
       // No se ha seleccionado una respuesta, muestra un mensaje de error o realiza alguna otra acción
+      if (element) {
+        element.style.color = 'red';
+      }
       console.log('Debes seleccionar una respuesta antes de continuar.')
-      return;
+      return;     
+    }
+    
+    if (element) {
+      element.style.color = 'black';
     }
     const userAnswers: Answer[] = this.questions.map((question) => {
       const selectedOption = question.answer || null; // Utiliza la propiedad "answer" de la pregunta en lugar de "selectedAnswer"
