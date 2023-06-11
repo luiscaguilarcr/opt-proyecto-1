@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {ResultsService} from "../services/results/results.service";
-import * as Chart from 'chart.js';
 import {IntelligenceService} from "../services/intelligences/intelligence.service";
 
 @Component({
@@ -12,11 +11,8 @@ import {IntelligenceService} from "../services/intelligences/intelligence.servic
 export class ResultsComponent {
   constructor(private resultsService: ResultsService, private router: Router, private intelligencesService: IntelligenceService) {}
 
-  @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
-
   data: any;
   predominant: any = [];
-  chart!: Chart;
 
   ngOnInit(): void {
     this.data = this.resultsService.results
@@ -43,35 +39,4 @@ export class ResultsComponent {
 
   }
 
-  ngAfterViewInit() {
-    //this.createChart();
-  }
-
-  createChart() {
-    const chartCanvas = this.chartCanvas.nativeElement.getContext('2d');
-    if (!chartCanvas) {
-      console.log("out")
-      return;
-    }
-
-    this.chart = new Chart(chartCanvas, {
-      type: 'bar',
-      data: {
-        labels: this.data.items.map((item: { intelligence_name: { toString: () => any; }; }) => item.intelligence_name),
-        datasets: [{
-          label: 'Peso',
-          data: this.data.items.map((item: { weight: any; }) => item.weight),
-          backgroundColor: 'rgba(255,206,0,0.71)',
-          borderColor: 'rgb(255,255,255)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        legend: {
-          position: 'left'
-        }
-      }
-    });
-  }
 }
