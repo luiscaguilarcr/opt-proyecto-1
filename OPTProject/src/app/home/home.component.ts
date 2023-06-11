@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {ResultsService} from "../services/results/results.service";
+import {async} from "rxjs";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'home',
@@ -8,14 +11,26 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private resultsService: ResultsService, private authService: AuthService) {}
+  hasResults = false;
 
   ngOnInit(): void {
+    this.resultsService.getResults().subscribe(
+      response => {
+        this.resultsService.results = response;
+        this.hasResults = true
+      },
+      (error) => {
+        this.hasResults = false
+      }
+    );
   }
 
-  goToForm() {
-    this.router.navigate(['/form']);
+  logout() {
+    this.authService.removeToken();
+    this.router.navigate(["/sign-in"]);
   }
+
 }
 
 

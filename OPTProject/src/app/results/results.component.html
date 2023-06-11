@@ -1,1 +1,14 @@
-<p>results works!</p>
+<div class="container">
+
+  <div class="intelligence-list">
+    <mat-card *ngFor="let predominant of predominant">
+      <mat-card-header>
+        <mat-card-title>{{predominant.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{predominant.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
