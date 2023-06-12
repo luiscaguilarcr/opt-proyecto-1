@@ -1,34 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.toolbar-container {
+  width: 100%;
+  text-align: center;
+
+}
+
 .toolbar {
   justify-content: center;
   align-items: center;
   background-color: primary;
   color: #ffffff;
   padding: 16px;
-  top: auto;
-  position: fixed;
+  top: 0;
+  position: sticky;
   z-index: 9999;
 }
 
 .welcome-title {
-  text-align: end;
+  text-align: center;
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 20px;
-  font-family: 'Tahoma', sans-serif; /* Fuente personalizada */
+  font-family: 'Tahoma', sans-serif;
 }
 
 .welcome-card {
   max-width: 600px;
-  margin: 0 auto;
-  margin-top: 100px;
+  width: 100%;
+  margin: 20px 0;
   padding: 20px;
 }
 
 .welcome-text {
   text-align: center;
   margin-bottom: 16px;
-  font-family: 'Tahoma', sans-serif; /* Fuente personalizada */
-  font-size: 18px; /* Tamaño de fuente personalizado */
+  font-family: 'Tahoma', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .intelligence-list {
@@ -69,12 +84,18 @@
 }
 
 .small-image {
-  max-width: 350px; /* Ajusta el tamaño máximo deseado */
-  max-height: 350px; /* Ajusta el tamaño máximo deseado */
+  max-width: 100%;
+  max-height: 350px;
   align-content: center;
 }
+
 .image-card {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 5%;
+}
+
+h1 {
+  text-align: center;
 }
