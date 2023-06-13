@@ -1,41 +1,75 @@
 mat-card {
-  max-width: 400px;
+  max-width: 605px;
   margin: 0 auto;
-  margin-top: 100px;
   padding: 20px;
 }
 
 mat-card-title {
-text-align: center;
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 form {
-display: flex;
-flex-direction: column;
-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 button {
-align-self: center;
+  align-self: center;
 }
+
 .button-card {
-  display: flex;
-  justify-content: right;
-  align-items: right;
+  width: 100%;
+  margin-top: 5%;
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 75vh; /* Ajusta la altura según tus necesidades */
+  height: 100vh;
 }
+
 .container2 {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 30vh; /* Ajusta la altura según tus necesidades */
+  height: 15vh;
+  text-align: justify;
+  word-break: break-word;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  mat-card {
+    margin-top: 50px;
+    padding: 15px;
+  }
+
+  mat-card-title {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  mat-card {
+    margin-top: 30px;
+    padding: 10px;
+  }
+
+  mat-card-title {
+    font-size: 18px;
+  }
+
+  .container {
+    height: auto;
+    padding: 20px;
+  }
+
+  .container2 {
+    height: auto;
+    padding: 10px;
+  }
 }
