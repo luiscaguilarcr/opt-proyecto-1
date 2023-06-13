@@ -1,37 +1,33 @@
-<mat-card class="toolbar-container">
+<div class="container">
+  <mat-card class="toolbar-container">
     <mat-toolbar class="toolbar" color="primary">
-        <span class="welcome-title">Sistema de evaluación de tipos de inteligencia mediante el algoritmo de
-            Euclides</span>
+      <span class="welcome-title">Sistema de evaluación de tipos de inteligencia mediante el algoritmo de Euclides</span>
     </mat-toolbar>
-</mat-card>
+  </mat-card>
 
-<mat-card class="welcome-card">
+  <mat-card class="welcome-card">
     <mat-card-content>
-        <h1 style="text-align: center;align-content: center;"><b>¡Descubre tus Inteligencias!</b></h1>
-        <h1 style="text-align: center;align-content: center;">Este emocionante test te ayudará a descubrir y explorar tus diferentes tipos de
-            inteligencia.</h1>
+      <h1><b>¡Descubre tus Inteligencias!</b></h1>
+      <h1>Este emocionante test te ayudará a descubrir y explorar tus diferentes tipos de inteligencia.</h1>
+      <mat-card-content>
+        <p class="welcome-text">Indicaciones</p>
+        <ul>
+          <li>A medida que avances, se te presentarán una serie de preguntas y deberás seleccionar la opción que mejor represente tu forma de pensar y actuar.</li>
+          <li>Cada pregunta está diseñada para evaluar diferentes aspectos de tu inteligencia y al finalizar, obtendrás un análisis detallado sobre los diferentes tipos de inteligencia en los que destacas.</li>
+          <li>No hay respuestas correctas o erróneas</li>
+          <li>Por favor contesta a todos los items.</li>
+        </ul>
+      </mat-card-content>
+      <mat-card class="image-card">
+        <img mat-card-image class="small-image" src="https://www.juanbarrios.com/wp-content/uploads/2022/08/12_inteligencias.png_819477898.png" alt="Descripción de la imagen">
         <mat-card-content>
-        <p class="welcome-text" style="align-content: center;">Indicaciones </p>
-         <ul>
-            <li>A medida que avances, se te presentarán una serie de preguntas y deberás seleccionar la opción que mejor represente tu forma de pensar y actuar.</li>
-            <br>
-            <li>Cada pregunta está diseñada para evaluar diferentes aspectos de tu inteligencia y al finalizar, obtendrás un análisis detallado sobre los diferentes tipos de inteligencia en los que destacas.</li>
-            <br>
-            <li>No hay respuestas correctas o erróneas</li>
-            <br>
-            <li>Por favor contesta a todos los items.</li>
-         </ul>
+          <div style="display:flex; justify-content:center; gap:10px">
+            <button mat-raised-button color="warn" (click)="logout()">Salir</button>
+            <button *ngIf="hasResults" mat-raised-button color="primary" routerLink="/results">Ver resultados</button>
+            <button mat-raised-button color="primary" routerLink="/form">Realizar test</button>
+          </div>
         </mat-card-content>
-        <br>
-        <mat-card class="image-card">
-            <img mat-card-image class="small-image" src="https://www.juanbarrios.com/wp-content/uploads/2022/08/12_inteligencias.png_819477898.png" alt="Descripción de la imagen">
-            <mat-card-content>
-                <div style="display:flex; justify-content:center; gap:10px">
-                    <button mat-raised-button color="warn" (click)="logout()">Salir</button>
-                    <button mat-raised-button color="primary" routerLink="/form">Realizar test</button>
-                    <button *ngIf="hasResults" mat-raised-button color="primary" routerLink="/results">Ver resultados</button>
-                </div>
-            </mat-card-content>
-        </mat-card>
+      </mat-card>
     </mat-card-content>
-</mat-card>
+  </mat-card>
+</div>
