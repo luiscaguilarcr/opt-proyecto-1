@@ -1,26 +1,29 @@
 <div class="container">
   <button class="back" (click)="goHome()">
-    <i class="fas fa-arrow-left"> < </i>
+    <i class="fas fa-arrow-left"><</i>
   </button>
-  <h1 class="title">TUS 3 INTELIGENCIAS PREDOMINANTES</h1>
-  <div class="intelligences">
-    <div *ngFor="let predominant of predominants; let i = index">
-      <div class="card">
-        <div class="card-image" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"></div>
-        <div class="card-content">
-          <h2>{{predominant.name}}</h2>
-          <p class="description">{{predominant.description}}</p>
+  <div class="container mt">
+    <h1 class="title">TUS 3 INTELIGENCIAS PREDOMINANTES</h1>
+    <div class="intelligences">
+      <div *ngFor="let predominant of predominants; let i = index">
+        <div class="card">
+          <div class="card-image" [ngStyle]="{'background-image': 'url(' + predominant.image + ')'}"></div>
+          <div class="card-content">
+            <h2>{{predominant.name}}</h2>
+            <p class="description">{{predominant.description}}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <h1 class="title">CONTACTA CON USUARIOS CON INTELIGENCIAS PREDOMINANTES SIMILARES</h1>
-  <div class="user-profiles">
-    <div class="user-profile" *ngFor="let user of users">
-      <div class="user-info">
-        <h3 class="user-name">{{ user.name }}</h3>
-        <p class="user-email"><a [href]="'mailto:' + user.email">{{ user.email }}</a></p>
+  <div class="container mt">
+    <h1 class="title">CONTACTA CON USUARIOS CON INTELIGENCIAS PREDOMINANTES SIMILARES</h1>
+    <div class="user-profiles">
+      <div class="user-profile similar-profile" *ngFor="let match of matches" (click)="redirectToEmail(match.user.email)">
+        <div class="user-info">
+          <h3 class="user-name">{{ match.user.full_name }}</h3>
+          <p class="user-email"><a>{{ match.user.email }}</a></p>
+        </div>
       </div>
     </div>
   </div>

@@ -15,13 +15,14 @@ export class HomeComponent implements OnInit {
   hasResults = false;
 
   ngOnInit(): void {
-    this.resultsService.getResults().subscribe(
-      response => {
-        this.resultsService.results = response;
-        this.hasResults = true
-      },
-      (error) => {
-        this.hasResults = false
+    this.resultsService.getResults().subscribe( {
+        next: (response) => {
+          this.resultsService.results = response;
+          this.hasResults = true;
+        },
+        error: (error) => {
+          this.hasResults = false;
+        }
       }
     );
   }

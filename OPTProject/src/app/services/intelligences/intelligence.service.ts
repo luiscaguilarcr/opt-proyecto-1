@@ -13,4 +13,8 @@ export class IntelligenceService {
   getIntelligences() {
     return this.http.get<[]>(`${this.URL}/`, httpOptions);
   }
+
+  getMatches() {
+    return this.http.get<[]>(`${this.URL}_profiles/actions/matches/`, httpOptions);
+  }
 }
