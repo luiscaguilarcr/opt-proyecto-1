@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {httpOptions} from "../utils";
 import {environment} from "../../../environments/environments";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +8,21 @@ import {HttpClient} from "@angular/common/http";
 export class ResultsService {
   results: [] = [];
   URL = `${environment.apiUrl}intelligences_profiles`;
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-type': 'application/json',
+      'Authorization': `${localStorage.getItem('access_token')}`
+    }),
+  };
+
   constructor(private http: HttpClient) {}
+
   getResults() {
-    return this.http.get<[]>(`${this.URL}/`, httpOptions);
+    return this.http.get<[]>(`${this.URL}/`, this.httpOptions);
+  }
+
+  getMatches() {
+    return this.http.get<[]>(`${this.URL}/actions/matches/`, this.httpOptions);
   }
 }

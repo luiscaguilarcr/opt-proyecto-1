@@ -46,7 +46,6 @@ export class ResultsComponent {
           this.data.items.forEach((item: any, index: number) => {
             if(index <= 2) {
               response.forEach((intelligence:any) => {
-                console.log(item.intelligence_name)
                 intelligence.name === item.intelligence_name ? this.predominants.push({"name": item.intelligence_name, "description": intelligence.description, "image": getUrlByName(item.intelligence_name)}) : null;
               })
             }
@@ -58,7 +57,7 @@ export class ResultsComponent {
       }
       );
 
-      this.intelligencesService.getMatches().subscribe( {
+      this.resultsService.getMatches().subscribe( {
           next: (response) => {
             response.length > 5 ? this.matches = response.slice(0, 4) : this.matches = response;
           },

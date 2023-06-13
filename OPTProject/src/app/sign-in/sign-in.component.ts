@@ -30,17 +30,18 @@ export class SignInComponent implements OnInit {
 
     const { email, password } = this.signInForm.value;
 
-    this.usersService.signIn(email, password).subscribe(
-      (data) => {
-        this.authService.setToken(data);
-        this.router.navigate(['/home']);
-      },
-      error => {
-        Swal.fire('Error de inicio de sesión')
-        this.signInForm = this.formBuilder.group({
-          email: [''],
-          password: ['']
-        });
+    this.usersService.signIn(email, password).subscribe( {
+        next: (data) => {
+          this.authService.setToken(data);
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          Swal.fire('Error de inicio de sesión')
+          this.signInForm = this.formBuilder.group({
+            email: [''],
+            password: ['']
+          });
+        }
       }
     );
   }

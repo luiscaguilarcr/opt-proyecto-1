@@ -38,3 +38,40 @@ button {
   cursor: pointer;
   font-weight: 500;
 }
+
+/* Estilos responsive */
+@media (max-width: 1200px) {
+  mat-card {
+    width: 30%;
+  }
+}
+
+@media (max-width: 992px) {
+  mat-card {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+  }
+
+  mat-card {
+    width: 60%;
+    margin-top: 50px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  mat-card {
+    width: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  mat-card {
+    padding: 15px;
+  }
+}

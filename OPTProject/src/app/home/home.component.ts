@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   hasResults = false;
 
   ngOnInit(): void {
-    this.resultsService.getResults().subscribe( {
+    this.resultsService.getResults().subscribe({
         next: (response) => {
           this.resultsService.results = response;
           this.hasResults = true;
